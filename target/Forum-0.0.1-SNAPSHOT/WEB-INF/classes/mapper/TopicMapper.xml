@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.TopicMapper" >
+  <resultMap id="BaseResultMap" type="domain.Topic" >
+    <id column="topicId" property="topicid" jdbcType="INTEGER" />
+    <result column="boardId" property="boardid" jdbcType="INTEGER" />
+    <result column="topicTitle" property="topictitle" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastPostTime" property="lastposttime" jdbcType="TIMESTAMP" />
+    <result column="topicViews" property="topicviews" jdbcType="INTEGER" />
+    <result column="topicReplies" property="topicreplies" jdbcType="INTEGER" />
+    <result column="digest" property="digest" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="domain.Topic" extends="BaseResultMap" >
+    <result column="topicText" property="topictext" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    topicId, boardId, topicTitle, userId, createTime, lastPostTime, topicViews, topicReplies, 
+    digest
+  </sql>
+  <sql id="Blob_Column_List" >
+    topicText
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_topic
+    where topicId = #{topicid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_topic
+    where boardId = #{boardid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_topic
+    where topicId = #{topicid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="domain.Topic" >
+    insert into t_topic (topicId, boardId, topicTitle, 
+      userId, createTime, lastPostTime, 
+      topicViews, topicReplies, digest, 
+      topicText)
+    values (#{topicid,jdbcType=INTEGER}, #{boardid,jdbcType=INTEGER}, #{topictitle,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{lastposttime,jdbcType=TIMESTAMP}, 
+      #{topicviews,jdbcType=INTEGER}, #{topicreplies,jdbcType=INTEGER}, #{digest,jdbcType=INTEGER}, 
+      #{topictext,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="domain.Topic" >
+    insert into t_topic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="topicid != null" >
+        topicId,
+      </if>
+      <if test="boardid != null" >
+        boardId,
+      </if>
+      <if test="topictitle != null" >
+        topicTitle,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="lastposttime != null" >
+        lastPostTime,
+      </if>
+      <if test="topicviews != null" >
+        topicViews,
+      </if>
+      <if test="topicreplies != null" >
+        topicReplies,
+      </if>
+      <if test="digest != null" >
+        digest,
+      </if>
+      <if test="topictext != null" >
+        topicText,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="topicid != null" >
+        #{topicid,jdbcType=INTEGER},
+      </if>
+      <if test="boardid != null" >
+        #{boardid,jdbcType=INTEGER},
+      </if>
+      <if test="topictitle != null" >
+        #{topictitle,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastposttime != null" >
+        #{lastposttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicviews != null" >
+        #{topicviews,jdbcType=INTEGER},
+      </if>
+      <if test="topicreplies != null" >
+        #{topicreplies,jdbcType=INTEGER},
+      </if>
+      <if test="digest != null" >
+        #{digest,jdbcType=INTEGER},
+      </if>
+      <if test="topictext != null" >
+        #{topictext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="domain.Topic" >
+    update t_topic
+    <set >
+      <if test="boardid != null" >
+        boardId = #{boardid,jdbcType=INTEGER},
+      </if>
+      <if test="topictitle != null" >
+        topicTitle = #{topictitle,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastposttime != null" >
+        lastPostTime = #{lastposttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicviews != null" >
+        topicViews = #{topicviews,jdbcType=INTEGER},
+      </if>
+      <if test="topicreplies != null" >
+        topicReplies = #{topicreplies,jdbcType=INTEGER},
+      </if>
+      <if test="digest != null" >
+        digest = #{digest,jdbcType=INTEGER},
+      </if>
+      <if test="topictext != null" >
+        topicText = #{topictext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where topicId = #{topicid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="domain.Topic" >
+    update t_topic
+    set boardId = #{boardid,jdbcType=INTEGER},
+      topicTitle = #{topictitle,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastPostTime = #{lastposttime,jdbcType=TIMESTAMP},
+      topicViews = #{topicviews,jdbcType=INTEGER},
+      topicReplies = #{topicreplies,jdbcType=INTEGER},
+      digest = #{digest,jdbcType=INTEGER},
+      topicText = #{topictext,jdbcType=LONGVARCHAR}
+    where topicId = #{topicid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="domain.Topic" >
+    update t_topic
+    set boardId = #{boardid,jdbcType=INTEGER},
+      topicTitle = #{topictitle,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastPostTime = #{lastposttime,jdbcType=TIMESTAMP},
+      topicViews = #{topicviews,jdbcType=INTEGER},
+      topicReplies = #{topicreplies,jdbcType=INTEGER},
+      digest = #{digest,jdbcType=INTEGER}
+    where topicId = #{topicid,jdbcType=INTEGER}
+  </update>
+</mapper>

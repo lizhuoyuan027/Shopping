@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.PostMapper" >
+  <resultMap id="BaseResultMap" type="domain.Post" >
+    <id column="postId" property="postid" jdbcType="INTEGER" />
+    <result column="boardId" property="boardid" jdbcType="INTEGER" />
+    <result column="topicId" property="topicid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="domain.Post" extends="BaseResultMap" >
+    <result column="postText" property="posttext" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    postId, boardId, topicId, userId, createTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    postText
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_post
+    where postId = #{postid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_post
+    where topicId = #{topicid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_post
+    where postId = #{postid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByTopicId" parameterType="java.lang.Integer" >
+    delete from t_topic
+    where topicId = #{topicid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="domain.Post" >
+    insert into t_post (postId, boardId, topicId, 
+      userId, createTime, postText
+      )
+    values (#{postid,jdbcType=INTEGER}, #{boardid,jdbcType=INTEGER}, #{topicid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{posttext,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="domain.Post" >
+    insert into t_post
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="postid != null" >
+        postId,
+      </if>
+      <if test="boardid != null" >
+        boardId,
+      </if>
+      <if test="topicid != null" >
+        topicId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="posttext != null" >
+        postText,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="postid != null" >
+        #{postid,jdbcType=INTEGER},
+      </if>
+      <if test="boardid != null" >
+        #{boardid,jdbcType=INTEGER},
+      </if>
+      <if test="topicid != null" >
+        #{topicid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="posttext != null" >
+        #{posttext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="domain.Post" >
+    update t_post
+    <set >
+      <if test="boardid != null" >
+        boardId = #{boardid,jdbcType=INTEGER},
+      </if>
+      <if test="topicid != null" >
+        topicId = #{topicid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="posttext != null" >
+        postText = #{posttext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where postId = #{postid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="domain.Post" >
+    update t_post
+    set boardId = #{boardid,jdbcType=INTEGER},
+      topicId = #{topicid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      postText = #{posttext,jdbcType=LONGVARCHAR}
+    where postId = #{postid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="domain.Post" >
+    update t_post
+    set boardId = #{boardid,jdbcType=INTEGER},
+      topicId = #{topicid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where postId = #{postid,jdbcType=INTEGER}
+  </update>
+</mapper>

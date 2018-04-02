@@ -1,0 +1,51 @@
+/* ::::: http://passport.lehu.shu.edu.cn/WebCommon/style/Global_v3.css ::::: */
+
+html { height: 100%; }
+body, td, th, div, input, select { font-family: "Trebuchet MS",Arial,"Bitstream Vera Sans",sans-serif,宋体; font-size: 12px; color: rgb(51, 51, 51); word-break: break-all; }
+body { background-color: rgb(255, 255, 255); height: 100%; }
+a { text-decoration: none; color: rgb(0, 0, 255); }
+ul, ol, li, dl, dt, dd, body, form { margin: 0px; padding: 0px; }
+form { display: inline; }
+#footer { height: 60px; clear: both; text-align: center; line-height: 160%; }
+#footer a { color: rgb(0, 0, 0); }
+#footer a:hover { text-decoration: underline; }
+a.logo { background: transparent url('logo.jpg') no-repeat scroll 0% 0%; float: left; width: 180px; height: 69px; display: block; margin: 15px 20px 8px 0px; }
+.msg { clear: both; color: rgb(182, 11, 0); font-size: 12px; background: rgb(255, 247, 214) url('ico_all.gif') no-repeat scroll 4px -777px; text-indent: 18px; line-height: 14px; display: none; border: 1px solid rgb(255, 224, 99); padding: 4px 0px 4px 4px; }
+input.btn { background: transparent url('btn.gif') no-repeat scroll 0% 0%; width: 82px; height: 23px; border: medium none; }
+
+/*repeat-x横向铺满 scroll图片随内容滚动*/
+body.havebg { background: rgb(255, 255, 255) url('top_bg.gif') repeat-x scroll 0% 0%; }
+/*postition:relative定位参照上一对象*/
+#wrap { width: 770px; margin: 0px auto; position: relative; height: 100%; }
+.rBorder { border-right: 1px solid rgb(204, 204, 204); }
+.cl { clear: left; }
+/*padding内补丁*/
+.login-panel h3 { margin: 0px; padding: 10px 13px 3px 20px; font-size: 14px; color: rgb(95, 95, 95); }
+.login-panel hr { color: rgb(204, 204, 204); height: 1px; margin: 10px 0px; width: 350px; }
+input.inp-login { border: 1px solid rgb(204, 204, 204); height: 18px; line-height: 18px; width: 160px; }
+.login-panel input.btn { background: transparent url('fill_all.gif') repeat-x scroll left -300px; border: 1px solid rgb(112, 177, 207); height: 23px; line-height: 23px; text-align: center; width: 115px; letter-spacing: 0px; }
+.login-panel td { padding: 5px 0px; }
+.login-panel label { display: block; margin: 0px auto; text-align: center; }
+.login-panel a { color: rgb(51, 51, 51); text-decoration: underline; }
+.login-panel a:hover { color: rgb(255, 117, 0); }
+.login-panel a.logo { padding: 0px; margin-top: 40px; }
+label.inline { display: inline; float: none; letter-spacing: 0px; }
+#head { position: absolute; top: 0px; left: 0px; width: 100%; height: 80px; }
+#footer { height: 60px; clear: both; text-align: center; line-height: 160%; margin-top: -70px; }
+#footer a { color: rgb(51, 51, 51); }
+#footer a:hover { color: rgb(255, 117, 0); }
+#footer { text-align: center; }
+#main { min-height: 100%; }
+#m_ext { padding-top: 80px; padding-bottom: 70px; }
+/* ::::: http://passport.lehu.shu.edu.cn/WebCommon/js/subModal/subModal.css ::::: */
+
+/*表单验证(显示验证信息图片)*/
+em { font-weight: bold; padding-right: 1em; vertical-align: top; color: red}
+em.error {
+  background:url('unchecked.gif') no-repeat 0px 0px;
+  padding-left: 16px;
+}
+em.success {
+  background:url('checked.gif') no-repeat 0px 0px;
+  padding-left: 16px;
+}

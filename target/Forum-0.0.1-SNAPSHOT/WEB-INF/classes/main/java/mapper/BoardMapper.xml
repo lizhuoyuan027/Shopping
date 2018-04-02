@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.BoardMapper" >
+  <resultMap id="BaseResultMap" type="domain.Board" >
+    <id column="boardId" property="boardid" jdbcType="INTEGER" />
+    <result column="boardName" property="boardname" jdbcType="VARCHAR" />
+    <result column="boardDesc" property="boarddesc" jdbcType="VARCHAR" />
+    <result column="topicNum" property="topicnum" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    boardId, boardName, boardDesc, topicNum, userId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_board
+    where boardId = #{boardid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+  	select 
+    <include refid="Base_Column_List" />
+    from t_board
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_board
+    where boardId = #{boardid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="domain.Board" >
+    insert into t_board (boardId, boardName, boardDesc, 
+      topicNum, userId)
+    values (#{boardid,jdbcType=INTEGER}, #{boardname,jdbcType=VARCHAR}, #{boarddesc,jdbcType=VARCHAR}, 
+      #{topicnum,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="domain.Board" >
+    insert into t_board
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="boardid != null" >
+        boardId,
+      </if>
+      <if test="boardname != null" >
+        boardName,
+      </if>
+      <if test="boarddesc != null" >
+        boardDesc,
+      </if>
+      <if test="topicnum != null" >
+        topicNum,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="boardid != null" >
+        #{boardid,jdbcType=INTEGER},
+      </if>
+      <if test="boardname != null" >
+        #{boardname,jdbcType=VARCHAR},
+      </if>
+      <if test="boarddesc != null" >
+        #{boarddesc,jdbcType=VARCHAR},
+      </if>
+      <if test="topicnum != null" >
+        #{topicnum,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="domain.Board" >
+    update t_board
+    <set >
+      <if test="boardname != null" >
+        boardName = #{boardname,jdbcType=VARCHAR},
+      </if>
+      <if test="boarddesc != null" >
+        boardDesc = #{boarddesc,jdbcType=VARCHAR},
+      </if>
+      <if test="topicnum != null" >
+        topicNum = #{topicnum,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where boardId = #{boardid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="domain.Board" >
+    update t_board
+    set boardName = #{boardname,jdbcType=VARCHAR},
+      boardDesc = #{boarddesc,jdbcType=VARCHAR},
+      topicNum = #{topicnum,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER}
+    where boardId = #{boardid,jdbcType=INTEGER}
+  </update>
+</mapper>
